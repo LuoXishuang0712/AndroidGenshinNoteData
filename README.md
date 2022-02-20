@@ -7,7 +7,8 @@
 1. Add HoyoLab oversea servers data source.
 2. Fix the problem about widgetservice will be killed by system.
 3. Add resin recovery calculator(to 20/40/90/next 40 or so).
-4. Test relibility.
+4. Test reliability.
+5. Retry when network fail (always in frequency request).
 
 ---
 

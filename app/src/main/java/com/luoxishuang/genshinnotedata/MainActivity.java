@@ -77,9 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent AddChar = new Intent();
         AddChar.setClass(this, AddCharacter.class);
-        Bundle passedData = new Bundle();
-        passedData.putBoolean("FromMain", true);
-        AddChar.putExtras(passedData);
+        AddChar.putExtra("FromMain", true);
 
         FloatingActionButton fabAdd = findViewById(R.id.addUser);
         fabAdd.setOnClickListener(new View.OnClickListener() {

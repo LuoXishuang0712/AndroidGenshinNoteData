@@ -5,6 +5,9 @@ import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -132,6 +135,7 @@ public class InfoDetail extends AppCompatActivity {
             String retPath = userFile.saveUserData(getApplicationContext(), ID, data);
 //            Log.d("InfoDetail", "Saved path:" + retPath);
         }
+
         JSONObject finalRet = data;
         if(isSubThread){
             runOnUiThread(() -> {
@@ -194,6 +198,22 @@ public class InfoDetail extends AppCompatActivity {
         return past;
     }
 
+    private void bindPress(Integer presentResin, Integer restTime){
+        ListView info_list = findViewById(R.id.info_list);
+        info_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i==0){ //press resin data
+                    Intent calcResin = new Intent();
+                    calcResin.setClass(getApplicationContext(), calcResin.class);
+                    calcResin.putExtra("present", presentResin);
+                    calcResin.putExtra("rest", restTime);
+                    startActivity(calcResin);
+                }
+            }
+        });
+    }
+
     private void infoListAdd(JSONObject data, List<Map<String,String>> list, Integer adjust) throws JSONException {
         // todo : 没有家园信息时 Exception Handle
         // todo : 无家园信息的用户信息收集
@@ -236,6 +256,7 @@ public class InfoDetail extends AppCompatActivity {
                         "本周周本减半次数已用完。"
         );
         discount.put("data",String.format("%d/%d",data.getInt("remain_resin_discount_num"),data.getInt("resin_discount_num_limit")));
+        bindPress(calcRest(data.getInt("max_resin"),data.getInt("current_resin"),data.getInt("resin_recovery_time"),adjust),data.getInt("resin_recovery_time") - adjust);
         list.add(discount);
     }
 
