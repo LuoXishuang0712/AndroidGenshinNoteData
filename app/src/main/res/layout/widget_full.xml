@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:id="@+id/widget_full_main">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!-- user info start -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="旅行者1"
+                        android:textColor="@color/black"
+                        android:id="@+id/widget_full_info_nickname"
+                        android:textSize="10dp"
+                        android:layout_alignParentStart="true" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" "
+                        android:textColor="@color/black"
+                        android:id="@+id/widget_full_info_uid"
+                        android:textSize="10dp"
+                        android:layout_alignParentEnd="true" />
+                </RelativeLayout>
+                <!-- user info end -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" /><!-- blank gap -->
+                <!-- user data start -->
+                <!-- resin start -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="原粹树脂"
+                            android:textColor="@color/black"
+                            android:id="@+id/resin_full_text"
+                            android:layout_alignParentStart="true"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="160/160"
+                            android:textColor="@color/black"
+                            android:id="@+id/resin_full_data"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+                        android:id="@+id/resin_full_alert"
+                        android:text="原粹树脂已满" />
+                </LinearLayout>
+                <!-- resin end -->
+                <!-- task start -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="每日委派"
+                            android:textColor="@color/black"
+                            android:id="@+id/task_full_text"
+                            android:layout_alignParentStart="true"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="0/4"
+                            android:textColor="@color/black"
+                            android:id="@+id/task_full_data"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+                        android:id="@+id/task_full_alert"
+                        android:text="每日委派尚未完成" />
+                </LinearLayout>
+                <!-- task end -->
+                <!-- home coin start -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="宝钱"
+                            android:textColor="@color/black"
+                            android:id="@+id/homecoin_full_text"
+                            android:layout_alignParentStart="true"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="2400/2400"
+                            android:textColor="@color/black"
+                            android:id="@+id/homecoin_full_data"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+                        android:id="@+id/homecoin_full_alert"
+                        android:text="洞天宝钱已满" />
+                </LinearLayout>
+                <!-- task end -->
+                <!-- discount start -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="周本减半"
+                            android:textColor="@color/black"
+                            android:id="@+id/discount_full_text"
+                            android:layout_alignParentStart="true"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="0/3"
+                            android:textColor="@color/black"
+                            android:id="@+id/discount_full_data"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+                        android:id="@+id/discount_full_alert"
+                        android:text="周本减半次数尚未使用" />
+                </LinearLayout>
+                <!-- task end -->
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="派遣探索"
+                android:id="@+id/widget_full_exp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
