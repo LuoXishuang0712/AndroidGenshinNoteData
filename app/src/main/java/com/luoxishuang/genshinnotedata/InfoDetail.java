@@ -275,7 +275,7 @@ public class InfoDetail extends AppCompatActivity {
             tmp.put("text", (tData.getInt("remained_time") - adjust <= 0) ?
                     "探索已完成。":
                     "预计"+sec2str(tData.getInt("remained_time") - adjust)+"后完成");
-            if(tData.getString("status").equals("Finished")){
+            if((tData.getInt("remained_time") - adjust <= 0)){
                 finish_count ++;
             }
             tmp.put("char",nameSplit(tData.getString("avatar_side_icon")));

@@ -159,12 +159,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        for(int i=0;i<data.size();i++) {  // load cache data
+            HashMap<String, String> map = new HashMap<String, String>();
+            Map<String, Object> dbData = ddbh.getCharID(data.get(i).get("id"));
+            map.put("id", data.get(i).get("id"));
+            map.put("nickname", (String) dbData.get("nickname"));
+            map.put("level", "冒险等阶 : " + dbData.get("level"));
+            map.put("region", (String) dbData.get("regionName"));
+            map.put("uid", "uid : " + dbData.get("uid"));
+            list.add(map);
+        }
+        sa.notifyDataSetChanged();
+
         for(int i=0;i<data.size();i++){
             int finalI = i;
             requestOB reOB = new requestOB() {
                 @Override
                 public void onDataChanged(Object rdata) throws JSONException {
-                    HashMap<String,String> map = new HashMap<String,String>();
+                    HashMap<String,String> map = (HashMap<String, String>) list.get(finalI);
                     if(((JSONObject)rdata).getInt("retcode") != 0){
                         map.put("id",data.get(finalI).get("id"));
                         map.put("nickname","cookies已失效！");
@@ -190,11 +202,9 @@ public class MainActivity extends AppCompatActivity {
                                 genshinData.chinese_decode(charData.getString("region_name"))
                         );
                     }
-//                    Log.d("InitList",String.format("GetData : %s", map.toString()));
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            list.add(map);
                             sa.notifyDataSetChanged();
                         }
                     });
@@ -221,15 +231,6 @@ public class MainActivity extends AppCompatActivity {
                         "当前无网络！显示缓存信息",
                         Toast.LENGTH_LONG
                 ).show();
-                HashMap<String,String> map = new HashMap<String,String>();
-                Map<String, Object> dbData = ddbh.getCharID(data.get(i).get("id"));
-                map.put("id",data.get(finalI).get("id"));
-                map.put("nickname", (String) dbData.get("nickname"));
-                map.put("level","冒险等阶 : " + dbData.get("level"));
-                map.put("region", (String) dbData.get("regionName"));
-                map.put("uid","uid : " + dbData.get("uid"));
-                list.add(map);
-                sa.notifyDataSetChanged();
             }
         }
     }
