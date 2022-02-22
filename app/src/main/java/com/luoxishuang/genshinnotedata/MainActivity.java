@@ -1,11 +1,14 @@
 package com.luoxishuang.genshinnotedata;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.IDNA;
 import android.media.session.PlaybackState;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -66,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
 
+        widgetUpdateService.invoke(getApplicationContext());
+
         mConnectivity = (ConnectivityManager)getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
 
         udbh = new userDBHandler(getApplicationContext());
@@ -74,6 +80,16 @@ public class MainActivity extends AppCompatActivity {
         ddbh.init();
         wdbh = new widgetDBHandler(getApplicationContext());
         wdbh.init();
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = getString(R.string.channel_id);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(getString(R.string.channel_id), name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
 
         Intent AddChar = new Intent();
         AddChar.setClass(this, AddCharacter.class);
@@ -225,13 +241,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).start();
             }
-            else{
-                Toast.makeText(
-                        getApplicationContext(),
-                        "当前无网络！显示缓存信息",
-                        Toast.LENGTH_LONG
-                ).show();
-            }
         }
+        if(mConnectivity.getActiveNetworkInfo() == null){
+            Toast.makeText(
+                    getApplicationContext(),
+                    "当前无网络！显示缓存信息",
+                    Toast.LENGTH_LONG
+            ).show();
+        }
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event){
+        if(event.getKeyCode() == KeyEvent.KEYCODE_BACK){
+            moveTaskToBack(true);
+            return true;
+        }
+        return dispatchKeyEvent(event);
     }
 }

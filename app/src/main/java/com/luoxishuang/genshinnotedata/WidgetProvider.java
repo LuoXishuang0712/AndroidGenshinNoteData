@@ -23,7 +23,6 @@ public class WidgetProvider extends AppWidgetProvider {
 
     public static int serviceCount = 0;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         Intent intent = new Intent(context, WidgetProvider.class);
@@ -43,8 +42,6 @@ public class WidgetProvider extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(R.id.widget_main, pendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
-
-        setService(context);
 
         new widgetUpdateMethod().update(context);
 
@@ -125,7 +122,6 @@ public class WidgetProvider extends AppWidgetProvider {
         if(!wdbh.getWidgetID(appWidgetIds[0]).isEmpty()){
             wdbh.deleteWidget(appWidgetIds[0]);
         }
-        unsetService(context);
         super.onDeleted(context,appWidgetIds);
     }
 
@@ -135,21 +131,5 @@ public class WidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onDisabled(Context context){
-    }
-
-    public static void setService(Context context){
-        if(serviceCount++ == 0){
-            Intent service = new Intent(context, widgetUpdateService.class);
-            context.startService(service);
-        }
-        Log.d("setService", "now serviceCount = "+ serviceCount);
-    }
-
-    public static void unsetService(Context context){
-        if(--serviceCount == 0){
-            Intent service = new Intent(context, widgetUpdateService.class);
-            context.stopService(service);
-        }
-        Log.d("unsetService", "now serviceCount = "+ serviceCount);
     }
 }

@@ -30,12 +30,19 @@ public class request {
         get.setHeader("Accept", "application/json");
 
         try {
-            HttpResponse res = client.execute(get);
-            if (res.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                HttpEntity entity = res.getEntity();
-                String result = EntityUtils.toString(entity);
-                response = new JSONObject(result);
-            }
+            int cnt = 0;
+            do {
+                HttpResponse res = client.execute(get);
+                if (res.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                    HttpEntity entity = res.getEntity();
+                    String result = EntityUtils.toString(entity);
+                    response = new JSONObject(result);
+                }
+                if(cnt != 0){
+                    Thread.sleep(100);
+                }
+                cnt++;
+            } while(response.getInt("retcode") != 0 && cnt < 5);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

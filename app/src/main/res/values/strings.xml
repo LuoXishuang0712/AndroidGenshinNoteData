@@ -9,4 +9,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- 小部件通知 -->
+    <string name="channel_id">小部件更新服务</string>
+    <string name="channel_description">当小部件更新服务运行时保持一个常驻通知</string>
+    <string name="channel_title">原神便签数据</string>
+    <string name="channel_content">便签更新进程正在运行中</string>
 </resources>

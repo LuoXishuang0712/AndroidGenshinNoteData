@@ -20,7 +20,6 @@ public class WidgetFullProvider extends AppWidgetProvider {
     String broadcastString = "com.luoxishuang.genshinnotedata.WIDGETFULL";
     private widgetDBHandler wdbh = MainActivity.wdbh;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         Intent intent = new Intent(context, WidgetFullProvider.class);
@@ -41,7 +40,6 @@ public class WidgetFullProvider extends AppWidgetProvider {
 
         appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
 
-        WidgetProvider.setService(context);
         new widgetUpdateMethod().update(context);
 
         super.onUpdate(context,appWidgetManager,appWidgetIds);
@@ -102,15 +100,6 @@ public class WidgetFullProvider extends AppWidgetProvider {
         if(!wdbh.getWidgetID(appWidgetIds[0]).isEmpty()){
             wdbh.deleteWidget(appWidgetIds[0]);
         }
-        WidgetProvider.unsetService(context);
         super.onDeleted(context,appWidgetIds);
-    }
-
-    @Override
-    public void onEnabled(Context context){
-    }
-
-    @Override
-    public void onDisabled(Context context){
     }
 }

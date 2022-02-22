@@ -84,6 +84,8 @@ public class InfoDetail extends AppCompatActivity {
 
         // 此处判断是否有网络并进行分支，有网络则开启子线程进行请求，否则读取缓存
 
+        // todo : 当网络延迟过大（访问盐失效）时，重新生成盐并访问 -> 删除request中的重试循环
+
         if( mConnectivity.getActiveNetworkInfo() != null ){
             new Thread(new Runnable() {
                 @Override
@@ -116,7 +118,6 @@ public class InfoDetail extends AppCompatActivity {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void drawUI(JSONObject data, boolean isSubThread, String ID){
         ListView info_list = findViewById(R.id.info_list);
         String[] info_from = new String[]{"mainTitle","subTitle","data"};
@@ -152,7 +153,7 @@ public class InfoDetail extends AppCompatActivity {
         else{
             info_list.setAdapter(info_sa);
             exp_list.setAdapter(exp_sa);
-            Integer adjust = Math.toIntExact((new Date().getTime() - (Long) ddbh.getCharID(ID).get("lastUpdate")) / 1000);
+            int adjust = (int) ((new Date().getTime() - (Long) ddbh.getCharID(ID).get("lastUpdate")) / 1000);
             try {
                 infoListAdd(finalRet, info_mList, adjust);
                 expListAdd(finalRet.getJSONArray("expeditions"), exp_mList, adjust);

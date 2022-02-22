@@ -29,7 +29,6 @@ public class widgetUpdateMethod {
 
     public ConnectivityManager mConnectivity ;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public final void update(Context context){
         this.context = context;
         mConnectivity = (ConnectivityManager)context.getSystemService(context.CONNECTIVITY_SERVICE);
@@ -61,7 +60,6 @@ public class widgetUpdateMethod {
         awm.updateAppWidget(widgetInfo.get("widgetID"), rv);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void handleWidget(Map<String,Integer> widgetInfo){
         final Integer ID = (Integer) widgetInfo.get("charID");
         Map<String,String> retData = udbh.getID(String.valueOf(ID));
@@ -124,14 +122,13 @@ public class widgetUpdateMethod {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void drawWidget(JSONObject data, boolean isSubThread, Map<String, Integer> widgetInfo){
         RemoteViews rv;
         int[] componentList;
         Map<String, Object> userData = ddbh.getCharID(String.valueOf(widgetInfo.get("charID")));
         int adjust = 0;
         if(!isSubThread){
-            adjust = Math.toIntExact((new Date().getTime()) - ((Long) userData.get("lastUpdate")));
+            adjust = (int) ((new Date().getTime()) - ((Long) userData.get("lastUpdate")));
         }
         if(widgetInfo.get("is_full") == 0){
             rv = new RemoteViews(context.getPackageName(), R.layout.widget);
