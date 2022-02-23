@@ -65,28 +65,9 @@ public class WidgetProvider extends AppWidgetProvider {
         return Integer.parseInt(tmp[tmp.length - 1]);
     }
 
-    private void initListener(Context context){
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, this.getClass()));
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
-        Intent intent = new Intent(context, WidgetProvider.class);
-        for(int appWidgetId : appWidgetIds){
-            if(!wdbh.getWidgetID(appWidgetId).isEmpty()){
-                intent.setAction(broadcastString + "." + appWidgetId);
-            }
-            else{
-                intent.setAction(broadcastString);
-            }
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-            remoteViews.setOnClickPendingIntent(R.id.widget_main, pendingIntent);
-        }
-        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
-    }
-
     @Override
     public void onReceive(Context context, Intent intent){
         Log.d("Widget", "onReceive activity: " + intent.getAction());
-        initListener(context);
         if(broadcastString.equals(getActivity(intent.getAction()))){
             Integer actID = getActivityID(intent.getAction());
 //            Log.d("Widget", "onReceive private intent source id : "+actID);
@@ -123,13 +104,5 @@ public class WidgetProvider extends AppWidgetProvider {
             wdbh.deleteWidget(appWidgetIds[0]);
         }
         super.onDeleted(context,appWidgetIds);
-    }
-
-    @Override
-    public void onEnabled(Context context){
-    }
-
-    @Override
-    public void onDisabled(Context context){
     }
 }

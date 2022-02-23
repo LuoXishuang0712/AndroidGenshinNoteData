@@ -88,6 +88,22 @@ public class widgetDBHandler {
     }
 
     @SuppressLint("Range")
+    public Map<String,Integer> getCharID(Integer widgetID){
+        Map<String,Integer> ans = new HashMap<>();
+        helper = new widgetDB(context);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor ret = db.query(tableName, new String[]{"*"}, String.format("charID=%d", widgetID), null,null,null,null);
+        if(ret != null && ret.moveToNext()){
+            ans.put("id", ret.getInt(ret.getColumnIndex("id")));
+            ans.put("widgetID", ret.getInt(ret.getColumnIndex("widgetID")));
+            ans.put("charID", ret.getInt(ret.getColumnIndex("charID")));
+            ans.put("is_full", ret.getInt(ret.getColumnIndex("is_full")));
+        }
+        db.close();
+        return ans;
+    }
+
+    @SuppressLint("Range")
     public Map<String,Integer> getWidgetNull(Integer widgetID){
         Map<String,Integer> ans = new HashMap<>();
         helper = new widgetDB(context);

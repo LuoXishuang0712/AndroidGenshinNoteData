@@ -53,6 +53,7 @@ public class widgetUpdateService extends JobService {
                 .setContentText(getString(R.string.channel_content))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(false)
+                .setDefaults(NotificationCompat.FLAG_ONLY_ALERT_ONCE)
                 .setChannelId(CHANNEL_ID)
                 .setOngoing(true);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);

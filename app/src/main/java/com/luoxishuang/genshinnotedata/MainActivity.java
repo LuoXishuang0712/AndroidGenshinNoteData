@@ -34,6 +34,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     public ConnectivityManager mConnectivity ;
 
+    private Toolbar toolbar;
+
     @Override
     public Context getApplicationContext() {
         return super.getApplicationContext();
@@ -71,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.content_main);
 
         widgetUpdateService.invoke(getApplicationContext());
+
+        toolbar = ((Toolbar) findViewById(R.id.toolbar_main_activity));
+        toolbar.getMenu().clear();
+        toolbar.inflateMenu(R.menu.mainactivity_menu);
 
         mConnectivity = (ConnectivityManager)getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
 
@@ -100,6 +107,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(AddChar);
+            }
+        });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.toolbar_setting:
+                        Log.d("toolbar", "setting pressed");
+                }
+                return false;
             }
         });
 
@@ -145,9 +163,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String itemID = ((HashMap<String,String>) sa.getItem(i-1)).get("id");
-                udbh.deleteRecord(itemID);
-                ddbh.deleteCharIDRecord(itemID);
-                initList();
+                if(wdbh.getCharID(Integer.parseInt(itemID)).isEmpty()){
+                    udbh.deleteRecord(itemID);
+                    ddbh.deleteCharIDRecord(itemID);
+                    initList();
+                }
+                else{
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "存在未解绑的小部件，请移除小部件后重试！",
+                            Toast.LENGTH_LONG
+                    ).show();
+                }
                 return false;
             }
         });

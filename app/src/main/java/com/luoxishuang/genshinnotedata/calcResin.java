@@ -93,7 +93,10 @@ public class calcResin extends AppCompatActivity {
     }
 
     private Integer calcBase(Integer present, Integer times){
-        return (((present - 1) / times) + 1) * times;
+        if(present.equals(max_resin)){
+            return max_resin;
+        }
+        return (((present) / times) + 1) * times;
     }
 
     private Integer calcToBase(Integer present, Integer rest, Integer base) {

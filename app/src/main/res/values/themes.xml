@@ -22,4 +22,11 @@
     <style name="Theme.GenshinNoteData.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.GenshinNoteData.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:overlapAnchor">false</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:itemBackground">@color/white</item>
+    </style>
 </resources>

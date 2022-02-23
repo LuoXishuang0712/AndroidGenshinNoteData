@@ -14,7 +14,9 @@
             android:layout_height="50dp"
             android:background="#FF66CCFF"
             android:title="@string/app_name"
-            android:titleTextColor="@color/white">
+            android:id="@+id/toolbar_main_activity"
+            android:titleTextColor="@color/white"
+            android:theme="@style/toolbar_theme">
 
         </Toolbar>
         <View

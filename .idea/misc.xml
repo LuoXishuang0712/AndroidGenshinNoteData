@@ -13,7 +13,7 @@
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/calc_resin.xml" value="0.5" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/char_listview_cell.xml" value="0.5" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/character_list.xml" value="0.18489583333333334" />
-        <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/content_main.xml" value="0.18" />
+        <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/content_main.xml" value="0.33" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/expeditions_list_cell.xml" value="0.17" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/fragment_first.xml" value="0.358695652173913" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/fragment_second.xml" value="0.21666666666666667" />
@@ -21,9 +21,12 @@
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/info_list_cell.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/lv_header.xml" value="0.18" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/multi_char_selector.xml" value="0.19427083333333334" />
+        <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/setting.xml" value="0.33" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/widget.xml" value="0.301707779886148" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/widget_char_select.xml" value="0.21077383497221033" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/layout/widget_full.xml" value="0.33" />
+        <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/menu/mainactivity_menu.xml" value="0.5" />
+        <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/menu/menu_main.xml" value="0.5" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/xml/widget_full_info.xml" value="0.2427007299270073" />
         <entry key="..\:/Users/hra20/AndroidStudioProjects/GenshinNoteData/app/src/main/res/xml/widget_info.xml" value="0.2639902676399027" />
       </map>
