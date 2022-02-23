@@ -30,11 +30,8 @@ public class WidgetProvider extends AppWidgetProvider {
 
         if(wdbh.getWidgetID(appWidgetIds[0]).isEmpty()){
             wdbh.insertWidget(appWidgetIds[0]);
-            intent.setAction(broadcastString + "." + appWidgetIds[0]);
         }
-        else{
-            intent.setAction(broadcastString);
-        }
+        intent.setAction(broadcastString + "." + appWidgetIds[0]);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
