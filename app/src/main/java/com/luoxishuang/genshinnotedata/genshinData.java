@@ -26,11 +26,12 @@ public class genshinData {
         return new BigInteger(1, raw_data).toString(16);
     }
 
-    public static void getRequest(String url, String cookies, requestOB retOB){
+    public static boolean getRequest(String url, String cookies, requestOB retOB){
         long _time = System.currentTimeMillis() / 1000;
         long _rand = (int)((Math.random() + 1) * 100000);
         String _check = get_md5(String.format(salt, _time, _rand, url.split("\\?")[1]));
         String _ds = String.format("%d,%d,%s", _time, _rand, _check);
+        boolean ret = false;
 
         Map<String,String> header = new HashMap<String,String>();
         header.put("Cookie", cookies);
@@ -39,33 +40,34 @@ public class genshinData {
         header.put("x-rpc-client_type", "5");
 
         try {
-            request.doGet(url, header, retOB);
+            ret = request.doGet(url, header, retOB);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return ret;
     }
 
     public static String chinese_decode(String chn){
         return new String(chn.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
     }
 
-    public static void getUserInfo(String cookie, requestOB retOB) {
-        getRequest(infoUrl, cookie, retOB);
+    public static boolean getUserInfo(String cookie, requestOB retOB) {
+        return getRequest(infoUrl, cookie, retOB);
     }
 
     public static JSONObject splitUserInfo(JSONObject rawData, int char_num) throws JSONException {
         return rawData.getJSONObject("data").getJSONArray("list").getJSONObject(char_num);
     }
 
-    public static void getUserData(String cookie, String game_uid, String region, requestOB retOB) throws JSONException {
-        getRequest(
+    public static boolean getUserData(String cookie, String game_uid, String region, requestOB retOB) throws JSONException {
+        return getRequest(
                 String.format(dataUrl, game_uid, region),
                 cookie,
                 retOB
         );
     }
 
-    public static void validCookie(String cookie, requestOB retOB) throws JSONException {
-        getRequest(infoUrl, cookie, retOB);
+    public static boolean validCookie(String cookie, requestOB retOB) throws JSONException {
+        return getRequest(infoUrl, cookie, retOB);
     }
 }

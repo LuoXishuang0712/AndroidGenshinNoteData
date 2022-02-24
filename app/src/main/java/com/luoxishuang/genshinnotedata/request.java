@@ -13,11 +13,12 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class request {
-    public static void doGet(String url, Map<String, String> header, requestOB retOB) {
+    public static boolean doGet(String url, Map<String, String> header, requestOB retOB) {
         HttpClient client = new DefaultHttpClient();
         HttpGet get = new HttpGet(url);
         JSONObject response = null;
         requestOBAB OBAB = new requestOBAB() { };
+        boolean request_status = false;
         OBAB.addObserver(retOB);
         get.addHeader("Content-type", "application/json; charset=utf-8");
         if(header != null) {
@@ -30,22 +31,19 @@ public class request {
         get.setHeader("Accept", "application/json");
 
         try {
-            int cnt = 0;
-            do {
-                HttpResponse res = client.execute(get);
-                if (res.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                    HttpEntity entity = res.getEntity();
-                    String result = EntityUtils.toString(entity);
-                    response = new JSONObject(result);
+            HttpResponse res = client.execute(get);
+            if (res.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                HttpEntity entity = res.getEntity();
+                String result = EntityUtils.toString(entity);
+                response = new JSONObject(result);
+                if(response.getInt("retcode") == 0){
+                    request_status = true;
                 }
-                if(cnt != 0){
-                    Thread.sleep(100);
-                }
-                cnt++;
-            } while(response.getInt("retcode") != 0 && cnt < 5);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         OBAB.setData(response);
+        return request_status;
     }
 }

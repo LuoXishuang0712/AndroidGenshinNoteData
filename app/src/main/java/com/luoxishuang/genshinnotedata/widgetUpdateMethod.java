@@ -69,25 +69,17 @@ public class widgetUpdateMethod {
             public void onDataChanged(Object data) throws JSONException {
                 JSONObject ret = (JSONObject) data ;
                 if(ret.getInt("retcode") != 0){
-                    Looper.prepare();
-                    Toast.makeText(
-                            context,
-                            String.format(
-                                    "获取游戏内数据失败！请检查是否开启便笺功能。\nmsg: %s\nuid: %s",
-                                    genshinData.chinese_decode(ret.getString("message")),
-                                    retData.get("game_uid")
-                            ),
-                            Toast.LENGTH_LONG
-                    ).show();
-                    Looper.loop();
+                    Log.e("widgetUpdate", ret.toString());
                 }
-                ret = ret.getJSONObject("data");
-                String retFilename = userFile.saveUserData(context, String.valueOf(ID), ret);
-                if(retFilename!=null){
-                    ddbh.updateData(ID, retFilename);
+                else{
+                    ret = ret.getJSONObject("data");
+                    String retFilename = userFile.saveUserData(context, String.valueOf(ID), ret);
+                    if(retFilename!=null){
+                        ddbh.updateData(ID, retFilename);
+                    }
+                    // draw info_list
+                    drawWidget(ret, true, widgetInfo);
                 }
-                // draw info_list
-                drawWidget(ret, true, widgetInfo);
             }
         };
         if(mConnectivity.getActiveNetworkInfo() != null){
@@ -95,7 +87,26 @@ public class widgetUpdateMethod {
                 @Override
                 public void run() {
                     try {
-                        genshinData.getUserData(retData.get("cookies"), retData.get("game_uid"), retData.get("region"), reOB);
+                        boolean ret = false;
+                        int count = 0;
+                        do{
+                            ret = genshinData.getUserData(retData.get("cookies"), retData.get("game_uid"), retData.get("region"), reOB);
+                            count++;
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }while(!ret && count < 5);
+                        if(!ret){
+                            Looper.prepare();
+                            Toast.makeText(
+                                    context,
+                                    "获取游戏内数据失败！请检查是否开启便笺功能。",
+                                    Toast.LENGTH_LONG
+                            ).show();
+                            Looper.loop();
+                        }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }

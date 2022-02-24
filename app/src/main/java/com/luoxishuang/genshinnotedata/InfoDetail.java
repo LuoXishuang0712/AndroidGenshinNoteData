@@ -60,38 +60,47 @@ public class InfoDetail extends AppCompatActivity {
             public void onDataChanged(Object data) throws JSONException {
                 JSONObject ret = (JSONObject) data ;
                 if(ret.getInt("retcode") != 0){
-                    Looper.prepare();
-                    Toast.makeText(
-                            InfoDetail.this,
-                            String.format(
-                                    "获取游戏内数据失败！请检查是否开启便笺功能。\nmsg: %s",
-                                    genshinData.chinese_decode(ret.getString("message")
-                                    )),
-                            Toast.LENGTH_LONG
-                    ).show();
-                    finish();
-                    Looper.loop();
+                    Log.e("getRequest",ret.toString());
                 }
-                ret = ret.getJSONObject("data");
-                String retFilename = userFile.saveUserData(getApplicationContext(), ID, ret);
-                if(retFilename!=null){
-                    ddbh.updateData(Integer.parseInt(ID), retFilename);
+                else{
+                    ret = ret.getJSONObject("data");
+                    String retFilename = userFile.saveUserData(getApplicationContext(), ID, ret);
+                    if(retFilename!=null){
+                        ddbh.updateData(Integer.parseInt(ID), retFilename);
+                    }
+                    // draw info_list
+                    drawUI(ret, true, ID);
                 }
-                // draw info_list
-                drawUI(ret, true, ID);
             }
         };
 
         // 此处判断是否有网络并进行分支，有网络则开启子线程进行请求，否则读取缓存
-
-        // todo : 当网络延迟过大（访问盐失效）时，重新生成盐并访问 -> 删除request中的重试循环
 
         if( mConnectivity.getActiveNetworkInfo() != null ){
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        genshinData.getUserData(retData.get("cookies"), retData.get("game_uid"), retData.get("region"), reOB);
+                        boolean ret = false;
+                        int count = 0;
+                        do{
+                            ret = genshinData.getUserData(retData.get("cookies"), retData.get("game_uid"), retData.get("region"), reOB);
+                            count++;
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }while(!ret && count < 5);
+                        if(!ret){
+                            Looper.prepare();
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "获取游戏内数据失败！请检查是否开启便笺功能。",
+                                    Toast.LENGTH_LONG
+                                    ).show();
+                            Looper.loop();
+                        }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
