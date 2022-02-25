@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;

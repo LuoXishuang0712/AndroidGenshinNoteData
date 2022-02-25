@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -61,7 +60,6 @@ public class widgetAddChar extends AppCompatActivity {
         charList.setAdapter(sa);
 
         charList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String itemID = ((HashMap<String,String>) sa.getItem(i)).get("id");

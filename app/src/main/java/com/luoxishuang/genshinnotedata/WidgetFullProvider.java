@@ -5,16 +5,10 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import androidx.annotation.RequiresApi;
-
 import java.util.Arrays;
-import java.util.Map;
-
-import javax.sql.StatementEvent;
 
 public class WidgetFullProvider extends AppWidgetProvider {
     String broadcastString = "com.luoxishuang.genshinnotedata.WIDGETFULL";

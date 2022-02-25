@@ -1,6 +1,7 @@
 package com.luoxishuang.genshinnotedata;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,8 @@ public class calcResin extends AppCompatActivity {
             ).show();
             finish();
         }
+
+        Log.d("resin calculator", "present : " + present.toString() + " rest : " + rest.toString());
 
         ((TextView) findViewById(R.id.current_resin_data)).setText(String.format("%d/%d", present, max_resin));
         ((TextView) findViewById(R.id.current_resin_time)).setText(sec2str(rest));

@@ -3,19 +3,12 @@ package com.luoxishuang.genshinnotedata;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteException;
-import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import androidx.annotation.RequiresApi;
-
 import java.util.Arrays;
-import java.util.Map;
 
 public class WidgetProvider extends AppWidgetProvider {
     String broadcastString = "com.luoxishuang.genshinnotedata.WIDGET";
