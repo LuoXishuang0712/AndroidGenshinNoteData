@@ -160,14 +160,14 @@ public class widgetUpdateMethod {
             rv.setTextViewText(componentList[4], data.getInt("resin_recovery_time") - adjust <= 0 ? "原粹树脂已满" : sec2str(data.getInt("resin_recovery_time") - adjust));
 //            rv.setTextViewText(componentList[5], );  // task text can be ignored
             rv.setTextViewText(componentList[6], String.format("%d/%d",data.getInt("total_task_num")-data.getInt("finished_task_num"),data.getInt("total_task_num")));
-            rv.setTextViewText(componentList[7], data.getInt("finished_task_num") == data.getInt("total_task_num") ? (data.getBoolean("is_extra_task_reward_received") ? "安逸的氛围，喜欢。" : "每日委任奖励还未领取。") : "劳逸结合是不错，但也别放松过头。");
+            rv.setTextViewText(componentList[7], data.getBoolean("is_extra_task_reward_received") ? "安逸的氛围，喜欢。" : (data.getInt("finished_task_num") == data.getInt("total_task_num") ? "每日委任奖励还未领取。" : "劳逸结合是不错，但也别放松过头。"));
             if(widgetInfo.get("is_full") != 0){
 //                rv.setTextViewText(componentList[8], );  // homeCoin text
                 rv.setTextViewText(componentList[9], String.format("%d/%d",calcRest(data.getInt("max_home_coin"),data.getInt("current_home_coin"),data.getInt("home_coin_recovery_time"), adjust),data.getInt("max_home_coin")));
                 rv.setTextViewText(componentList[10], data.getInt("home_coin_recovery_time") - adjust <= 0 ? "洞天宝钱已全部恢复。" : sec2str(data.getInt("home_coin_recovery_time") - adjust));
 //                rv.setTextViewText(componentList[11], );  // discount text
                 rv.setTextViewText(componentList[12], String.format("%d/%d",data.getInt("remain_resin_discount_num"),data.getInt("resin_discount_num_limit")));
-                rv.setTextViewText(componentList[13], data.getInt("remain_resin_discount_num") == data.getInt("resin_discount_num_limit") ? "若陀想你了！" : "本周周本减半次数已用完。");
+                rv.setTextViewText(componentList[13], data.getInt("remain_resin_discount_num") != 0 ? "若陀想你了！" : "本周周本减半次数已用完。");
                 JSONArray exp_data = data.getJSONArray("expeditions");
                 int all = 0; int finished = 0;
                 for(int i=0; i<exp_data.length(); i++){

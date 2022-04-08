@@ -15,6 +15,7 @@
 **Known issues**
 
 1. Resin calculator is likely to display negative time while no Internet connection.
+1. Some kinds of OS (or UI) will has trouble in opening WebView.
 
 ---
 

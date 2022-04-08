@@ -234,36 +234,36 @@ public class InfoDetail extends AppCompatActivity {
         //{"mainTitle","subTitle","data"}
         resin.put("mainTitle","原粹树脂");
         resin.put("subTitle",
-                data.getInt("resin_recovery_time") - adjust <= 0?
-                "原粹树脂已全部恢复。":
-                "预计"+sec2str(data.getInt("resin_recovery_time") - adjust)+"后完全恢复"
+            data.getInt("resin_recovery_time") - adjust <= 0?
+            "原粹树脂已全部恢复。":
+            "预计"+sec2str(data.getInt("resin_recovery_time") - adjust)+"后完全恢复"
         );
         resin.put("data",String.format("%d/%d",calcRest(data.getInt("max_resin"),data.getInt("current_resin"),data.getInt("resin_recovery_time"),adjust),data.getInt("max_resin")));
         list.add(resin);
         homeCoin.put("mainTitle","洞天宝钱");
         homeCoin.put("subTitle",
-                data.getInt("home_coin_recovery_time") - adjust <= 0?
-                        "洞天宝钱已全部恢复。":
-                        "预计"+sec2str(data.getInt("home_coin_recovery_time") - adjust)+"后完全恢复"
+            data.getInt("home_coin_recovery_time") - adjust <= 0?
+                "洞天宝钱已全部恢复。":
+                "预计"+sec2str(data.getInt("home_coin_recovery_time") - adjust)+"后完全恢复"
         );
         homeCoin.put("data",String.format("%d/%d",calcRest(data.getInt("max_home_coin"),data.getInt("current_home_coin"),data.getInt("home_coin_recovery_time"), adjust),data.getInt("max_home_coin")));
         list.add(homeCoin);
         task.put("mainTitle","每日委托");
         task.put("subTitle",
-                data.getInt("finished_task_num") == data.getInt("total_task_num")?
-                        (data.getBoolean("is_extra_task_reward_received")?
-                            "安逸的氛围，喜欢。":
-                            "每日委任奖励还未领取。")
-                        :
-                        "劳逸结合是不错，但也别放松过头。"
+            data.getBoolean("is_extra_task_reward_received")?
+                "安逸的氛围，喜欢。":  // extra reward has received
+                (data.getInt("finished_task_num") == data.getInt("total_task_num")?
+                    "每日委任奖励还未领取。":  // task finished (4/4) but extra reward has not received
+                    "劳逸结合是不错，但也别放松过头。"  // neither receive reward nor finish tasks
+                )
         );
         task.put("data",String.format("%d/%d",data.getInt("total_task_num")-data.getInt("finished_task_num"),data.getInt("total_task_num")));
         list.add(task);
         discount.put("mainTitle","周本减半");
         discount.put("subTitle",
-                data.getInt("remain_resin_discount_num") == data.getInt("resin_discount_num_limit")?
-                        "若陀想你了！":
-                        "本周周本减半次数已用完。"
+            data.getInt("remain_resin_discount_num") != 0 ?
+                "若陀想你了！":
+                "本周周本减半次数已用完。"
         );
         discount.put("data",String.format("%d/%d",data.getInt("remain_resin_discount_num"),data.getInt("resin_discount_num_limit")));
         bindPress(calcRest(data.getInt("max_resin"),data.getInt("current_resin"),data.getInt("resin_recovery_time"),adjust),data.getInt("resin_recovery_time") - adjust);

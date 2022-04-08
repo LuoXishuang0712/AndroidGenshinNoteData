@@ -72,7 +72,7 @@ public class AddCharacter extends AppCompatActivity {
             switch (step[0]){
                 case 0:
                     mainWebView.loadUrl("https://user.mihoyo.com/");
-                    info.setText("请在账号中心完成登录\n完成后点击右侧案件获取cookies");  //please login in the user center \n then press the right button to get cookies.
+                    info.setText("请在账号中心完成登录\n完成后点击右侧按键获取cookies");  //please login in the user center \n then press the right button to get cookies.
                     step[0]++;
                     break;
                 case 1:
