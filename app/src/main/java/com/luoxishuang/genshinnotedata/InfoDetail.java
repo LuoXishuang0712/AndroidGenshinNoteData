@@ -266,7 +266,10 @@ public class InfoDetail extends AppCompatActivity {
                 "本周周本减半次数已用完。"
         );
         discount.put("data",String.format("%d/%d",data.getInt("remain_resin_discount_num"),data.getInt("resin_discount_num_limit")));
-        bindPress(calcRest(data.getInt("max_resin"),data.getInt("current_resin"),data.getInt("resin_recovery_time"),adjust),data.getInt("resin_recovery_time") - adjust);
+        bindPress(
+                calcRest(data.getInt("max_resin"),data.getInt("current_resin"),data.getInt("resin_recovery_time"),adjust),
+                data.getInt("resin_recovery_time") - adjust
+        );
         list.add(discount);
     }
 

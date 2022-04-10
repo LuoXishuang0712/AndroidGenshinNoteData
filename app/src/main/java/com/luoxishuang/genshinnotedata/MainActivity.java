@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 // todo : 外服hoyolab数据源增加
+// todo : UI切换到API28后的androidx
 
 public class MainActivity extends AppCompatActivity {
     public static userDBHandler udbh;
