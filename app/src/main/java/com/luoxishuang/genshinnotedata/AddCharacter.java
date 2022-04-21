@@ -48,14 +48,19 @@ public class AddCharacter extends AppCompatActivity {
 
         info.setText("请在米游社完成登录\n完成后点击右侧按键跳转下一步");  //please login at the mihoyo bbs \n and then press the button right go next
 
+        // WebView 的各种设置
         mainWebView.loadUrl("https://bbs.mihoyo.com/ys/");
 //        CookieSyncManager.createInstance(self);
         CookieManager.getInstance().removeAllCookie();
-        WebView.setWebContentsDebuggingEnabled(false);  //Turn off before release
+        MyWebChromeClient myWebChromeClient = new MyWebChromeClient();
+        mainWebView.setWebChromeClient(myWebChromeClient);
+        WebView.setWebContentsDebuggingEnabled(true);  //Turn off before release
         mainWebView.clearCache(true);
         mainWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         mainWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
         mainWebView.getSettings().setDomStorageEnabled(true);
+        mainWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        mainWebView.getSettings().setJavaScriptEnabled(true);
         mainWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
